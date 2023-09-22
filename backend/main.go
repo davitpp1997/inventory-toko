@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -21,6 +22,7 @@ func main() {
 	}
 
 	route := gin.Default()
+	route.Use(cors.Default())
 	apiV1 := route.Group("/v1")
 
 	//Barang
@@ -41,7 +43,7 @@ func main() {
 
 	apiV1.POST("/add_stock", stockHandler.NewStock)
 
-	route.Run()
+	route.Run(":8001")
 }
 
 // func koneksiDatabase() {
